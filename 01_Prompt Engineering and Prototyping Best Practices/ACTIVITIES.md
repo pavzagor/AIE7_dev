@@ -10,46 +10,56 @@ Loom explainer: https://www.loom.com/share/4df23cdca6534589a8a9762a0d92a98e?sid=
 
 ## Prompts & Aspects Tested
 1. Explain the concept of object-oriented programming in simple terms to a complete beginner.
+
 Aspect Tested:
 - Adherence to specific style: e.g., specified level — complete beginner
 - Accuracy: does it do what it has been requested to do?
 - Usefulness: is the answer useful to the end user
-Comments:
+
+My comments:
 - While my product expects user to just send the concept name (e.g., OOP), it still worked well with the whole prompt. It djusted for the style, provided correct info, and useful info. Given that it's an edtech product, this prompt was a good fit. 
 
 2. Read the following paragraph and provide a concise summary of the key points. 
 The future of software development is one of significant change and growth, driven by artificial intelligence, cloud computing, and the increasing demand for customized and efficient solutions. AI is poised to automate many aspects of the software development lifecycle, from coding and testing to deployment and maintenance, while also enabling the creation of more intelligent and adaptive software. This shift will require developers to adapt and acquire new skills, focusing on areas like AI integration, cybersecurity, and managing complex, long-term software maintenance. 
+
 Aspect Tested:
 - Compression rate: how much more concise the summary is than the original paragraph? Summaries should help us save time vs. original writing without losing too much information. 
 - Information retention: how much information is retained in summary vs. original text? Summarisation removes pieces of information, but if critical elements are missing, than the summary is not retaining information well.
 - Hallucinations: does summary introduce new pieces of information that aren't grounded in the original text? does summary creates new information that isn't in the original text?
 - Omission: does summary omit important information or distorts it by removing some pieces of information?
+
 My comments:
 - My product isn't geared towards summarisation, and it, essentially, performed a reverse operation, and expanded paragraph into more info.
 - I found out a bug with markdown or LLMs that I need to fix due to this task. The output has a lot of "-" in it. 
 
 
 3. Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.
+
 Aspect Tested:
 - Creativity: can the system generate creative output that doesn't require facts?
 - Style alignment: can the system fulfill the requirements of style (short, 100-150 words)
+
 My comments:
 - Yup, just like in the previous prompt, my system teaches you to write that story and ignored the ask to write it. I should've built something else for this homework assignment, but bland chat interface is too boring!
 
 4. If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?
+
 Aspect Tested:
 - Reasoning/Chain of thought: can the system go step by step to answer a question that includes multiple reasoning steps
 - LLM limitations: in case the system can't reason about the task, can system recognise its limits in some domains, such as math?
+
 My comments:
 - System failed to do what was asked once again because I have a huge teaching system prompt with a lot of instructions. That's expected.
 - However, it's funny how the system approached this. It created a nice learning plan related to problem decomposition etc. 
 
 5. Rewrite the following paragraph (taken from reddit) in a professional, formal tone. Do you ever just wake up one day and your brain has decided to unlock some weird fever dream memory thing - and you're just sat back like, huh? Well, mine did that today. I used to read this series as a kid. It was a series about this group of young girls who become fairies - really sweet stuff. Anyways, I google them. Shouldn't have done that. Because I realized that a lot of the covers were replaced by badly photo-shopped ones. And this made me curious. And so I click on the author, then I see that a lot of their books have become very uh odd. Well, folks, I googled. I found their website.
+
 Aspect Tested:
 - Style alignment: can LLM adjust the style of the text to the required style?
 - Information retention/Grounding: can LLM ground itself in the provided information without changing anything and retaining key information provided?
 - Hallucination: does LLM hallucinate new information that wasn't mentioned in the original text?
 - Omission: does LLM omit important information while rewriting?
+
 My comments
 - Oooh, despite the product being heavilty oriented towards education and heavily system prompted, it still incorporated the original task into the output. The examples that TeacherAgent uses are based on the paragraph from the prompt. Not bad. 
 
@@ -59,7 +69,6 @@ What are some limitations of vibe checking as an evaluation tool?
 - Not exhaustive: it provides a glimpse into most eggregious issues.
 - Not robust: we can't rely on vibe check in production due to huge number of potential issues. 
 - Biased to our prompt: as users can prompt in different ways, we only test the way we approach it. 
-
 
 ## Overall system evaluation
 1. System did a pretty good job when prompts related to education, as system was built for education purposes. It failed other prompts in complying with the request due to intentional design choices.
