@@ -53,10 +53,27 @@ Run the repository and complete the following:
 
 What is the purpose of the `chunk_overlap` parameter when using `RecursiveCharacterTextSplitter` to prepare documents for RAG, and what trade-offs arise as you increase or decrease its value?
 
+##### ✅ Answer:
+
+1. 'chunk_overlap' defines how big will be an overlap between documents when they are split. It helps create continuity between documents, e.g., when we split one document in two, and without chunk_overlap only one documen may retain a piece of information that is contextually relevant to both chunks.
+2. When we increase chunk_overlap's value too much, we create chunks that are a) way too similar b) don't have enough unique context. In addition, we'll start creating too many chunks.
+3. When we decrease chunk_overlap's value too much, we create a potential issue with documents not having relevant context because only the previous chunk contains it, but the piece of information is relevan to both previous chunk and this chunk. 
+
+
 #### ❓ Question:
 
 Your retriever is configured with `search_kwargs={"k": 5}`. How would adjusting `k` likely affect RAGAS metrics such as Context Precision and Context Recall in practice, and why?
 
+##### ✅ Answer:
+1. Context Precision and Context Recall are somewhat at odds with each other, metaphorically speaking. They will react in different directions.
+2. Increasing 'k' will decrease precision and increase recall. With more documents retrieved, the number of relevant documents retrieved out of all documents retrieved (precision) will become lower because we'll start pulling less and less relevant documents. However, the completeness of context (recall) from retrieved documents will increase, because with more documents we have a higher likelihood of covering all the bases.
+3. Decreasing 'k' will increase precision and decrease recall. Less documents means that we increase the chance of all documents being relevant (good for precision), but completeness may take a hit because we'll have overall less context (bad for recall).
+
 #### ❓ Question:
 
 Compare the `agent` and `agent_helpful` assistants defined in `langgraph.json`. Where does the helpfulness evaluator fit in the graph, and under what condition should execution route back to the agent vs. terminate?
+
+##### ✅ Answer:
+1. Helpful agent decides whether to pass to helpfulness evaluator based on whether the last "message" was "action" or not. If it was an "action", then it passes the turn to helpfuless evaluator.
+2. Helpful agent terminates when: a) it exceeds 10 messages b)  when response is deemed helpful.
+3. Simple agent simply runs a tool and provides an answer. Simple agent, compared to the helpful agent, doesn't check for helpfulness. 
